@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // https://github.com/kulshekhar/ts-jest/issues/4081
+    "verbatimModuleSyntax": false
+  }
+}

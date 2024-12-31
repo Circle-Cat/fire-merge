@@ -1,0 +1,47 @@
+{
+  "name": "@circlecat/firebase-security-rules-builder",
+  "description": "Auto build Firebase Security Rules.",
+  "packageManager": "yarn@4.6.0",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "test": "./scripts/run-unit-tests.sh",
+    "lint": "eslint .",
+    "build": "tsc",
+    "prepare": "yarn build",
+    "publish": "yarn npm publish"
+  },
+
+  "source": "./src/index.ts",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "keywords": [
+    "firebase",
+    "security rules",
+    "typescript"
+  ],
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.2",
+    "eslint": "^9.17.0",
+    "globals": "^15.14.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.19.0"
+  }
+}
