@@ -1,0 +1,43 @@
+{
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit",
+    "source.sortMembers": "explicit",
+    "source.addMissingImports": "explicit"
+  },
+
+  "eslint.lintTask.enable": true,
+  "files.autoSaveWhenNoErrors": true,
+
+  // TypeScript inlayHints
+  "typescript.inlayHints.enumMemberValues.enabled": true,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.parameterTypes.enabled": true,
+  "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
+  "typescript.inlayHints.variableTypes.enabled": true,
+
+  // Yarn PnP configuration for VSCode
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // Jest configuration
+  "jest.runMode": {
+    "type": "on-demand",
+    "coverage": true
+  },
+  "jest.jestCommandLine": "nvm use default && yarn jest --runInBand --detectOpenHandles --forceExit --coverage",
+  "jest.shell": "/usr/bin/bash"
+}
