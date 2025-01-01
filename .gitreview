@@ -1,0 +1,5 @@
+[gerrit]
+host=review.circlecat.org
+port=29418
+project=fire-merge
+defaultbranch=main
