@@ -1,0 +1,59 @@
+{
+  "comments": [],
+  "submitRequirementResults": [
+    {
+      "submitRequirement": {
+        "name": "No-Unresolved-Comments",
+        "description": {
+          "value": "All comments should be resolved"
+        },
+        "applicabilityExpression": {},
+        "submittabilityExpression": {
+          "expressionString": "-has:unresolved AND label:Zero\u003dMIN"
+        },
+        "overrideExpression": {},
+        "allowOverrideInChildProjects": false
+      },
+      "applicabilityExpressionResult": {},
+      "submittabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"-has:unresolved AND label:Zero=MIN"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":["label:Zero=MIN"],"failingAtoms":["has:unresolved"]}
+      },
+      "overrideExpressionResult": {},
+      "patchSetCommitId": "d66ebb94e41abf09be74bc35ae3c5add639b53b9",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
+    },
+    {
+      "submitRequirement": {
+        "name": "Verified",
+        "description": {},
+        "applicabilityExpression": {
+          "value": {
+            "expressionString": "-branch:refs/meta/config"
+          }
+        },
+        "submittabilityExpression": {
+          "expressionString": "label:Verified\u003dMAX AND -label:Verified\u003dMIN"
+        },
+        "overrideExpression": {},
+        "allowOverrideInChildProjects": false
+      },
+      "applicabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"-branch:refs/meta/config"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":["branch:refs/meta/config"],"failingAtoms":[]}
+      },
+      "submittabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"label:Verified=MAX AND -label:Verified=MIN"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+      },
+      "overrideExpressionResult": {},
+      "patchSetCommitId": "d66ebb94e41abf09be74bc35ae3c5add639b53b9",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
+    }
+  ]
+}
