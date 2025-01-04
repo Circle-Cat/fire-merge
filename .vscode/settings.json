@@ -38,6 +38,6 @@
     "type": "on-demand",
     "coverage": true
   },
-  "jest.jestCommandLine": "nvm use default && yarn jest --runInBand --detectOpenHandles --forceExit --coverage",
-  "jest.shell": "/usr/bin/bash"
+  "jest.shell": "/usr/bin/bash",
+  "jest.jestCommandLine": "yarn test"
 }
