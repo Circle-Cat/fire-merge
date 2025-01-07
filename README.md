@@ -5,21 +5,26 @@
     ```bash
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
     ```
-2. Install `node`:
+2. Run the following command to apply the changes to your environment variables:
+    ```bash
+    source ~/.bashrc
+    ```
+3. Install `node`:
     ```bash
     nvm install node
     ```
-3. Add the following environment configuration into "~/.profile" (if you are using Linux)
+4. Add the following environment configuration into "~/.profile" (if you are using Linux)
     ```bash
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
     ```
-3. Install Node dependencies:
+5. Install Node dependencies:
     ```bash
-    yarn
+    corepack enable yarn
+    yarn install
     ```
-4. Install the folowing VSCode Extensions:
+6. Install the folowing VSCode Extensions:
     * [EditorConfig.EditorConfig](https://open-vsx.org/vscode/item?itemName=EditorConfig.EditorConfig)
     * [dbaeumer.vscode-eslint](https://open-vsx.org/vscode/item?itemName=dbaeumer.vscode-eslint)
     * [Orta.vscode-jest](https://open-vsx.org/vscode/item?itemName=Orta.vscode-jest)
