@@ -1,5 +1,7 @@
-export class ErrorMessageStatic {
-  public static readonly MULTIPLE_SR_TEMPLATE_FILES_ERROR = 'Multiple SR Template files found: {rootSrTemplate}. Cannot proceed.';
-  public static readonly SR_TEMPLATE_NOT_FOUND_ERROR = 'Cannot find SR Template: {rootSrTemplate}.';
-  public static readonly NO_RULE_FILE_TO_MERGE = 'No rule file need to merged, exit.';
+export enum ErrorMessageStatic {
+  MULTIPLE_SR_TEMPLATE_FILES_ERROR = 'Multiple SR Template files found: {rootSrTemplate}. Cannot proceed.',
+  SR_TEMPLATE_NOT_FOUND_ERROR = 'Cannot find SR Template: {rootSrTemplate}.',
+  NO_RULE_FILE_TO_MERGE = 'No rule file need to merged, exit.',
+  FILE_READ_FAILED_ERROR = 'Reading file failed: {filePath} by {error}',
+  CUSTOM_FEAD_FILE_FAIL_ERROR = 'ENOENT:no such file or directory'
 }
