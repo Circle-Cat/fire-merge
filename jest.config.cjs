@@ -25,5 +25,8 @@ module.exports = {
         tsconfig: './tsconfig.jest.json'
       }
     ],
-  }
+  },
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
 }
