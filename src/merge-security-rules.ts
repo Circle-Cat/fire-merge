@@ -128,3 +128,86 @@ export async function mergeSecurityRules(workspacePath: string, rootSrTemplate: 
   );
   fs.writeFileSync(path.join(workspacePath, rootSrFile), finalContent);
 }
+
+/**
+ * This function processes command line arguments passed to the script and 
+ * calls the provided callback with specific arguments extracted from the command line.
+ * It looks for three specific arguments:
+ * - `--workspace_path`: The repository path where the security rule files are located.
+ * - `--root_sr_template`: The file name of the root security rule template that will be used as the base.
+ * - `--root_sr_file`: The name of the output file where the final merged security rules will be saved.
+ * 
+ * The function checks if the required parameters are provided. If any of the parameters 
+ * are missing, it logs an error and exits without calling the callback.
+ * 
+ * @param callback - The callback function to be invoked once the command line 
+ * arguments are successfully parsed. The callback should accept three parameters:
+ *  - `workspacePath` (string)
+ *  - `rootSrTemplate` (string)
+ *  - `rootSrFile` (string)
+ * 
+ * @returns {Promise<void>} A promise that resolves when the callback is called with the parsed arguments.
+ * If required arguments are missing, the promise will not resolve, and the function will log an error.
+ * 
+ * @throws {Error} If any of the required command line arguments are missing, an error message will be logged.
+ * 
+ */
+export async function fetchCLIArguments(
+  callback: (workspacePath: string, rootSrTemplate: string, rootSrFile: string) => Promise<void>,
+): Promise<void> {
+
+  const args: string[] = process.argv.slice(CommonStatic.COMMAND_LINE_ARGS);
+
+  if (args.length !== CommonStatic.EXPECTED_ARG_COUNT) {
+    console.error(ErrorMessageStatic.REQUIRED_PARAMETERS_MISSING_MESSAGE);
+    return;
+  }
+
+  const cliArgs = {
+    workspacePath: '',
+    rootSrTemplate: '',
+    rootSrFile: ''
+  };
+  const seenArgs = new Set<string>();
+  const validFlags = new Set([
+    CommonStatic.CLI_ARG_WORKSPACE_PATH,
+    CommonStatic.CLI_ARG_ROOT_SR_TEMPLATE,
+    CommonStatic.CLI_ARG_ROOT_SR_FILE
+  ]);
+
+  for (let i = CommonStatic.LOOP_START; i < args.length; i++) {
+    const currentArg: string = args[i]?.trim() || '';
+    const nextArg: string = args[i + CommonStatic.INDEX_INCREMENT]?.trim() || '';
+
+    if (!validFlags.has(currentArg)) {
+      console.error(`${ErrorMessageStatic.REQUIRED_PARAMETERS_UNEXPECTED_MESSAGE}${currentArg}`);
+      return;
+    }
+
+    if (seenArgs.has(currentArg)) {
+      console.error(ErrorMessageStatic.REQUIRED_PARAMETERS_DUPLICATED_MESSAGE);
+      return;
+    }
+
+    seenArgs.add(currentArg);
+
+    switch (currentArg) {
+      case CommonStatic.CLI_ARG_WORKSPACE_PATH:
+        cliArgs.workspacePath = nextArg;
+        break;
+      case CommonStatic.CLI_ARG_ROOT_SR_TEMPLATE:
+        cliArgs.rootSrTemplate = nextArg;
+        break;
+      case CommonStatic.CLI_ARG_ROOT_SR_FILE:
+        cliArgs.rootSrFile = nextArg;
+        break;
+    }
+
+    i++;
+  }
+
+  const { workspacePath, rootSrTemplate, rootSrFile } = cliArgs;
+
+  await callback(workspacePath, rootSrTemplate, rootSrFile);
+
+}
