@@ -5,7 +5,6 @@ export enum CommonStatic {
   ENCODING_UTF8 = 'utf-8',
   NEW_LINE_SYMBOL = '\n',
   FUNCTION_CALLED_ONCE = 1,
-  FUNCTION_CALLED_THREE_TIMES = 3,
 }
 
 export enum FileType {
