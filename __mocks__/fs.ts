@@ -1,7 +1,7 @@
 
 import path from 'path';
-import { FileType } from '../src/static/common.static';
-import { ErrorMessageStatic } from '../src/static/errorMessage.static';
+import { FileType } from '../src/static/common.static.js';
+import { ErrorMessageStatic } from '../src/static/errorMessage.static.js';
 
 type State = {
     isDirectory(): boolean;

@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import { CommonStatic } from './static/common.static';
-import { ErrorMessageStatic } from './static/errorMessage.static';
+import { CommonStatic } from './static/common.static.js';
+import { ErrorMessageStatic } from './static/errorMessage.static.js';
+import { Command } from 'commander';
 
 /**
  * This regular expression is used to split a root security rule template into two parts:
@@ -130,4 +131,44 @@ export async function mergeSecurityRules(workspacePath: string, rootSrTemplate: 
     }
   );
   fs.writeFileSync(path.join(workspacePath, rootSrFile), finalContent);
+}
+
+/**
+ * This function processes command line arguments passed to the script and
+ * calls the provided callback with specific arguments extracted from the command line.
+ * It looks for three specific arguments:
+ * - `--workspace_path`: The repository path where the security rule files are located.
+ * - `--root_sr_template`: The file name of the root security rule template that will be used as the base.
+ * - `--root_sr_file`: The name of the output file where the final merged security rules will be saved.
+ *
+ * The function checks if the required parameters are provided. If any of the parameters
+ * are missing, it logs an error and exits without calling the callback.
+ *
+ * @param callback - The callback function to be invoked once the command line
+ * arguments are successfully parsed. The callback should accept three parameters:
+ *  - `workspacePath` (string)
+ *  - `rootSrTemplate` (string)
+ *  - `rootSrFile` (string)
+ *
+ * @returns {Promise<void>} A promise that resolves when the callback is called with the parsed arguments.
+ * If required arguments are missing, the promise will not resolve, and the function will log an error.
+ *
+ * @throws {Error} If any of the required command line arguments are missing, an error message will be logged.
+ *
+ */
+export async function fetchCLIArguments(
+  callback: (workspacePath: string, rootSrTemplate: string, rootSrFile: string) => Promise<void>,
+): Promise<void> {
+  const program = new Command();
+
+  program
+    .requiredOption('--workspace_path <path>', 'The repository path where the security rule files are located')
+    .requiredOption('--root_sr_template <path>', 'The root security rule template file name')
+    .requiredOption('--root_sr_file <path>', 'The output file name for merged security rules')
+    .action(async () => {
+      const { workspace_path, root_sr_template, root_sr_file } = program.opts();
+      callback(workspace_path, root_sr_template, root_sr_file);
+    });
+
+  program.parse(process.argv);
 }
