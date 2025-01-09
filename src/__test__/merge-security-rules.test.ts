@@ -1,5 +1,5 @@
 import fs from "../../__mocks__/fs";
-import { findRulesFiles, mergeSecurityRules, readFileContent } from "../merge-security-rules";
+import { fetchCLIArguments, findRulesFiles, mergeSecurityRules, readFileContent } from "../merge-security-rules";
 import { CommonStatic, FileType } from "../static/common.static";
 import { ErrorMessageStatic } from "../static/errorMessage.static";
 
@@ -256,5 +256,110 @@ describe('Test mergeSecurityRules', () => {
       TEST_EXPECTED_OUT_PUT_FILE_TEMPLATE_HAS_RULES_CONTENT
     );
     expect(fs.writeFileSync).toHaveBeenCalled();
+  });
+});
+
+describe('fetchCLIArguments', () => {
+  let exitSpy: jest.SpyInstance<never, [code?: string | number | null | undefined]>;
+  const callback = jest.fn();
+
+  beforeEach(() => {
+    jest.resetAllMocks();
+
+    exitSpy = jest.spyOn(process, 'exit').mockImplementation(() => {
+      throw new Error(ErrorMessageStatic.PROCESS_EXIT_ERROR);
+    });
+  });
+
+  afterEach(() => {
+    exitSpy.mockRestore();
+  });
+
+  it('should call the callback with correct arguments when all required arguments are provided', async () => {
+    process.argv = [
+      'node',
+      'test.js',
+      '--workspace_path',
+      '/path/to/repo',
+      '--root_sr_template',
+      '/path/to/template',
+      '--root_sr_file',
+      'output.json',];
+
+    await fetchCLIArguments(callback);
+
+    expect(callback).toHaveBeenCalledWith('/path/to/repo', '/path/to/template', 'output.json');
+  });
+
+  it('should call the callback with correct arguments when all required arguments are provided, regardless of order', async () => {
+    process.argv = [
+      'node',
+      'test.js',
+      '--root_sr_template',
+      '/path/to/template',
+      '--workspace_path',
+      '/path/to/repo',
+      '--root_sr_file',
+      'output.json',];
+
+    await fetchCLIArguments(callback);
+
+    expect(callback).toHaveBeenCalledWith('/path/to/repo', '/path/to/template', 'output.json');
+  });
+
+  it('should call the callback with correct arguments when all required arguments are provided, regardless of repeat', async () => {
+    process.argv = [
+      'node',
+      'test.js',
+      '--root_sr_template',
+      '/path/to/template',
+      '--workspace_path',
+      '/path/to/repo',
+      '--root_sr_file',
+      'output.json',
+      '--root_sr_file',
+      'output2.json',];
+
+    await fetchCLIArguments(callback);
+
+    expect(callback).toHaveBeenCalledWith('/path/to/repo', '/path/to/template', 'output2.json');
+  });
+
+  it('should not call the callback when required arguments are missing', async () => {
+    process.argv = [
+      'node',
+      'test.js',
+      '--root_sr_template',
+      'template.json',
+      '--root_sr_file',
+      'output.json'];
+
+    await expect(fetchCLIArguments(callback)).rejects.toThrow(ErrorMessageStatic.PROCESS_EXIT_ERROR);
+
+    expect(exitSpy).toHaveBeenCalledWith(CommonStatic.FUNCTION_CALLED_ONCE);
+    expect(callback).not.toHaveBeenCalled();
+
+    exitSpy.mockRestore();
+  });
+
+  it('should not call the callback with unexpoected argument', async () => {
+    process.argv = [
+      'node',
+      'test.js',
+      '--workspace_path',
+      '/path/to/repo',
+      '--root_sr_template',
+      '/path/to/template',
+      '--root_sr_file',
+      'output.json',
+      '--unexpected_path',
+      '/path/to/repo',];
+
+    await expect(fetchCLIArguments(callback)).rejects.toThrow(ErrorMessageStatic.PROCESS_EXIT_ERROR);
+
+    expect(exitSpy).toHaveBeenCalledWith(CommonStatic.FUNCTION_CALLED_ONCE);
+    expect(callback).not.toHaveBeenCalled();
+
+    exitSpy.mockRestore();
   });
 });
