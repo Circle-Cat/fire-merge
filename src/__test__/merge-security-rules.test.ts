@@ -278,3 +278,100 @@ describe('Test mergeSecurityRules', () => {
     );
   });
 });
+
+
+describe('fetchCLIArguments', (): void => {
+  let consoleErrorSpy: jest.SpyInstance;
+
+  beforeEach((): void => {
+    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation((): void => { });
+  });
+
+  afterEach((): void => {
+    consoleErrorSpy.mockRestore();
+  });
+
+  it('should call the callback with the correct arguments when valid CLI arguments are passed', async (): Promise<void> => {
+    const mockArgs: string[] = [
+      'node', 'script.js',
+      '--workspace_path', '/path/to/workspace',
+      '--root_sr_template', 'template.rules',
+      '--root_sr_file', 'output.rules'
+    ];
+    process.argv = mockArgs;
+
+    const callback = jest.fn();
+
+    await mergeSecurityRules.fetchCLIArguments(callback);
+
+    expect(callback).toHaveBeenCalledWith('/path/to/workspace', 'template.rules', 'output.rules');
+    expect(callback).toHaveBeenCalledTimes(1);
+  });
+
+  it('should log errors and not call the callback if parameters are missing', async (): Promise<void> => {
+    const mockArgs: string[] = [
+      'node', 'script.js',
+      '--workspace_path',
+      '--root_sr_file', 'output.rules'
+    ];
+    process.argv = mockArgs;
+
+    const callback = jest.fn();
+
+    await mergeSecurityRules.fetchCLIArguments(callback);
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(ErrorMessageStatic.REQUIRED_PARAMETERS_MISSING_MESSAGE);
+    expect(callback).not.toHaveBeenCalled();
+  });
+
+  it('should log errors and not call the callback if get unexpected parameter', async (): Promise<void> => {
+    const mockArgs: string[] = [
+      'node', 'script.js',
+      '--root_sr_template', 'template.rules',
+      '--root_sr_file', 'output.rules',
+      '--unexpected_key', 'unexpected value'
+    ];
+    process.argv = mockArgs;
+
+    const callback = jest.fn();
+
+    await mergeSecurityRules.fetchCLIArguments(callback);
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(ErrorMessageStatic.REQUIRED_PARAMETERS_UNEXPECTED_MESSAGE + '--unexpected_key');
+    expect(callback).not.toHaveBeenCalled();
+  });
+
+  it('should log errors and not call the callback if get duplicate parameters', async (): Promise<void> => {
+    const mockArgs: string[] = [
+      'node', 'script.js',
+      '--root_sr_template', 'template.rules',
+      '--root_sr_template', 'template.rules',
+      '--workspace_path', '/path/to/workspace',
+    ];
+    process.argv = mockArgs;
+
+    const callback = jest.fn();
+
+    await mergeSecurityRules.fetchCLIArguments(callback);
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(ErrorMessageStatic.REQUIRED_PARAMETERS_DUPLICATED_MESSAGE);
+    expect(callback).not.toHaveBeenCalled();
+  });
+
+  it('should log errors and not call the callback if get blank parameters', async (): Promise<void> => {
+    const mockArgs: string[] = [
+      'node', 'script.js',
+      ' ', '   ',
+      ' ', '    ',
+      ' ', '   ',
+    ];
+    process.argv = mockArgs;
+
+    const callback = jest.fn();
+
+    await mergeSecurityRules.fetchCLIArguments(callback);
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(ErrorMessageStatic.REQUIRED_PARAMETERS_UNEXPECTED_MESSAGE + '');
+    expect(callback).not.toHaveBeenCalled();
+  });
+});
