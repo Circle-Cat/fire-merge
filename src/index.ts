@@ -1,3 +1,8 @@
+
+import { fetchCLIArguments, mergeSecurityRules } from "./merge-security-rules";
+
 export default function run() {
-  console.info('Hello CircleCat!')
+  fetchCLIArguments(mergeSecurityRules);
 }
+
+run();
