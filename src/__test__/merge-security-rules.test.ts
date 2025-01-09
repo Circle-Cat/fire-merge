@@ -1,7 +1,7 @@
-import fs from "../../__mocks__/fs";
-import { findRulesFiles, mergeSecurityRules, readFileContent } from "../merge-security-rules";
-import { CommonStatic, FileType } from "../static/common.static";
-import { ErrorMessageStatic } from "../static/errorMessage.static";
+import fs from "../../__mocks__/fs.js";
+import { fetchCLIArguments, findRulesFiles, mergeSecurityRules, readFileContent } from "../merge-security-rules.js";
+import { CommonStatic, FileType } from "../static/common.static.js";
+import { ErrorMessageStatic } from "../static/errorMessage.static.js";
 
 jest.mock('fs', () => fs);
 
@@ -256,5 +256,106 @@ describe('Test mergeSecurityRules', () => {
       TEST_EXPECTED_OUT_PUT_FILE_TEMPLATE_HAS_RULES_CONTENT
     );
     expect(fs.writeFileSync).toHaveBeenCalled();
+  });
+});
+
+describe('fetchCLIArguments', () => {
+  let exitSpy: jest.SpyInstance<never, [code?: string | number | null | undefined]>;
+  const callback = jest.fn();
+
+  beforeEach(() => {
+    jest.resetAllMocks();
+
+    exitSpy = jest.spyOn(process, 'exit').mockImplementation(() => {
+      throw new Error(ErrorMessageStatic.PROCESS_EXIT_ERROR);
+    });
+  });
+
+  afterEach(() => {
+    exitSpy.mockRestore();
+  });
+
+  it('should call the callback with correct arguments when all required arguments are provided', async () => {
+    process.argv = [
+      'node',
+      'test.js',
+      '--workspace_path',
+      '/path/to/repo',
+      '--root_sr_template',
+      'template.rules',
+      '--root_sr_file',
+      'output.rules',];
+
+    await fetchCLIArguments(callback);
+
+    expect(callback).toHaveBeenCalledWith('/path/to/repo', 'template.rules', 'output.rules');
+  });
+
+  it('should call the callback with correct arguments when all required arguments are provided, regardless of order', async () => {
+    process.argv = [
+      'node',
+      'test.js',
+      '--root_sr_template',
+      'template.rules',
+      '--workspace_path',
+      '/path/to/repo',
+      '--root_sr_file',
+      'output.rules',];
+
+    await fetchCLIArguments(callback);
+
+    expect(callback).toHaveBeenCalledWith('/path/to/repo', 'template.rules', 'output.rules');
+  });
+
+  it('should call the callback with correct arguments when all required arguments are provided, regardless of repeat', async () => {
+    process.argv = [
+      'node',
+      'test.js',
+      '--root_sr_template',
+      'template.rules',
+      '--workspace_path',
+      '/path/to/repo',
+      '--root_sr_file',
+      'output.rules',
+      '--root_sr_file',
+      'output2.rules',];
+
+    await fetchCLIArguments(callback);
+
+    expect(callback).toHaveBeenCalledWith('/path/to/repo', 'template.rules', 'output2.rules');
+  });
+
+  it('should not call the callback when required arguments are missing', async () => {
+    process.argv = [
+      'node',
+      'test.js',
+      '--root_sr_template',
+      'template.json',
+      '--root_sr_file',
+      'output.rules'];
+
+    await expect(fetchCLIArguments(callback)).rejects.toThrow(ErrorMessageStatic.PROCESS_EXIT_ERROR);
+
+    expect(exitSpy).toHaveBeenCalledWith(CommonStatic.FUNCTION_CALLED_ONCE);
+    expect(callback).not.toHaveBeenCalled();
+  });
+
+  it('should not call the callback with unexpoected argument', async () => {
+    process.argv = [
+      'node',
+      'test.js',
+      '--workspace_path',
+      '/path/to/repo',
+      '--root_sr_template',
+      'template.rules',
+      '--root_sr_file',
+      'output.rules',
+      '--unexpected_path',
+      '/path/to/repo',];
+
+    await expect(fetchCLIArguments(callback)).rejects.toThrow(ErrorMessageStatic.PROCESS_EXIT_ERROR);
+
+    expect(exitSpy).toHaveBeenCalledWith(CommonStatic.FUNCTION_CALLED_ONCE);
+    expect(callback).not.toHaveBeenCalled();
   });
 });
