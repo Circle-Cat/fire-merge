@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a97ee5d8_32ccf642",
+        "filename": "src/__test__/merge-security-rules.test.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000075
+      },
+      "writtenOn": "2025-01-20T03:01:46Z",
+      "side": 1,
+      "message": "Delete the extra empty line. Only keep one empty line between the imports and the implementation codes.",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01d6fe3b_ef702f39",
+        "filename": "src/__test__/merge-security-rules.test.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000075
+      },
+      "writtenOn": "2025-01-20T03:01:46Z",
+      "side": 1,
+      "message": "Mock certain functions in `fs` module is a preferrable way, recommend example: https://jestjs.io/docs/manual-mocks#examples\n\nBy mocking the `fs` module with your own mocked module `__mocks__/fs.js`, you can mock the actual tree-like filesystem and specify any file content, another benefit is, you won\u0027t set up this mock repeatedly in different testing files.",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffd9449f_12d80fee",
+        "filename": "src/__test__/merge-security-rules.test.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000075
+      },
+      "writtenOn": "2025-01-20T03:01:46Z",
+      "side": 1,
+      "message": "Don\u0027t import the whole module, instead, import the exported functions when you need.\n\nE.g. `import { findRulesFile } from \"../merge-security-rules\";\n\nThis also apply to all the cases in this file.",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b699271e_a171044b",
+        "filename": "src/merge-security-rules.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000075
+      },
+      "writtenOn": "2025-01-20T03:01:46Z",
+      "side": 1,
+      "message": "Could you add a comment to explain this regex expression? It would be great if you can also give an example in the comment, this can greatly help others understand its logic.",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ad3369e_d92ac428",
+        "filename": "src/merge-security-rules.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000075
+      },
+      "writtenOn": "2025-01-20T03:01:46Z",
+      "side": 1,
+      "message": "Don\u0027t need to specify type for `list`, let TypeScript infer the type for you from `fs.readdirSync`.\n\nUnlike Java or other strongly typed programming languages, JavaScript is a weakly typed language, even though TypeScript has strong typing system, it is still a superset of JavaScript, it doesn\u0027t do any type-casting.\n\nThat\u0027s being said, when you specify the type for `list` it means no matter what kind of type returned from `fs.readdirSync`, it will always be treated as `string[]`, the question is, what if `fs.readdirSync` returns a unwanted type?\n\nIn fact, if you check [Node.js doc](https://nodejs.org/api/fs.html#fsreaddirsyncpath-options), you will see it returns a union type `\u003cstring[]\u003e | \u003cBuffer[]\u003e | \u003cfs.Dirent[]\u003e`, by default it will return `string[]`, when you specify different options, it will return different types to you.\n\nThough in practice, **line 18** can still work, but IMHO it\u0027s not a recommended way, instead, I would prefer `const list \u003d fs.readdirSync(dir);`\n\nThis comment also applies to other use cases in this file, e.g. **line 21 and 22**",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3b0ec4b_008a5c0b",
+        "filename": "src/merge-security-rules.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000075
+      },
+      "writtenOn": "2025-01-20T03:01:46Z",
+      "side": 1,
+      "message": "What if the `filePath` is `/firestore.rules` or `./stroage.rules` ? I guess this condition will be checked first, then it won\u0027t be able to get into the last condition.",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "046d643d_090c68d0",
+        "filename": "src/static/common.static.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000075
+      },
+      "writtenOn": "2025-01-20T03:01:46Z",
+      "side": 1,
+      "message": "See the comment in `src/static/errorMessage.static.ts`",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5999cbda_549834f5",
+        "filename": "src/static/errorMessage.static.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000075
+      },
+      "writtenOn": "2025-01-20T03:01:46Z",
+      "side": 1,
+      "message": "Normally in TypeScript/JavaScript codes, we don\u0027t prefer OOP (i.e. `class`es), instead, we treat every file as a `module`, in each module, we can have `exported` types or functions.\n\nSo, I would prefer something like `enum`, then export it, e.g.\n```javascript\nexport default enum ErrorMessage {\n\n  FILE_READ_FAILED_ERROR \u003d \u0027Reading file failed: {filePath} by {error}\u0027,\n\n}\n```\n\nWhen you use it, just like:\n```javascript\nimport ErrorMessage from \u0027\u003cpath-to\u003e/error-message.ts\u0027\n\nconsole.info(ErrorMessage.FILE_READ_FAILED_ERROR);\n```",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    }
+  ]
+}
