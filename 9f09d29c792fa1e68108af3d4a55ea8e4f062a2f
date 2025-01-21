@@ -18,6 +18,24 @@
       "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e952fbf_9dbb2b83",
+        "filename": "src/__test__/merge-security-rules.test.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2025-01-21T06:39:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a97ee5d8_32ccf642",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01d6fe3b_ef702f39",
@@ -35,6 +53,24 @@
       "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5739bc6f_ef62eb39",
+        "filename": "src/__test__/merge-security-rules.test.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2025-01-21T06:39:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01d6fe3b_ef702f39",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffd9449f_12d80fee",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-01-20T03:01:46Z",
       "side": 1,
       "message": "Don\u0027t import the whole module, instead, import the exported functions when you need.\n\nE.g. `import { findRulesFile } from \"../merge-security-rules\";\n\nThis also apply to all the cases in this file.",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0853d6d3_53283c66",
+        "filename": "src/__test__/merge-security-rules.test.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2025-01-21T06:39:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffd9449f_12d80fee",
       "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
       "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
     },
