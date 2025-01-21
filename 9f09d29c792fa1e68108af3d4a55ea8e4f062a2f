@@ -123,6 +123,24 @@
       "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "391bb2de_3b005ef7",
+        "filename": "src/merge-security-rules.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2025-01-21T06:39:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b699271e_a171044b",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ad3369e_d92ac428",
@@ -140,6 +158,24 @@
       "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8203c11_bb3fe3e9",
+        "filename": "src/merge-security-rules.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2025-01-21T06:39:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ad3369e_d92ac428",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3b0ec4b_008a5c0b",
@@ -153,6 +189,24 @@
       "writtenOn": "2025-01-20T03:01:46Z",
       "side": 1,
       "message": "What if the `filePath` is `/firestore.rules` or `./stroage.rules` ? I guess this condition will be checked first, then it won\u0027t be able to get into the last condition.",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bad05532_3eb70a69",
+        "filename": "src/merge-security-rules.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2025-01-21T06:39:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3b0ec4b_008a5c0b",
       "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
       "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
     },
