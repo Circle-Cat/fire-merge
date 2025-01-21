@@ -228,6 +228,24 @@
       "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2189271d_dcb18738",
+        "filename": "src/static/common.static.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2025-01-21T06:40:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "046d643d_090c68d0",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5999cbda_549834f5",
@@ -241,6 +259,24 @@
       "writtenOn": "2025-01-20T03:01:46Z",
       "side": 1,
       "message": "Normally in TypeScript/JavaScript codes, we don\u0027t prefer OOP (i.e. `class`es), instead, we treat every file as a `module`, in each module, we can have `exported` types or functions.\n\nSo, I would prefer something like `enum`, then export it, e.g.\n```javascript\nexport default enum ErrorMessage {\n\n  FILE_READ_FAILED_ERROR \u003d \u0027Reading file failed: {filePath} by {error}\u0027,\n\n}\n```\n\nWhen you use it, just like:\n```javascript\nimport ErrorMessage from \u0027\u003cpath-to\u003e/error-message.ts\u0027\n\nconsole.info(ErrorMessage.FILE_READ_FAILED_ERROR);\n```",
+      "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
+      "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "432b0f23_5b5a1e4a",
+        "filename": "src/static/errorMessage.static.ts",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2025-01-21T06:40:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5999cbda_549834f5",
       "revId": "9f09d29c792fa1e68108af3d4a55ea8e4f062a2f",
       "serverId": "064ee66a-ae46-499d-ad6e-e0a180e6bf4d"
     }
