@@ -1,8 +1,8 @@
+import { Command } from 'commander';
 import fs from 'fs';
 import path from 'path';
 import { CommonStatic } from './static/common.static.js';
 import { ErrorMessageStatic } from './static/errorMessage.static.js';
-import { Command } from 'commander';
 
 /**
  * This regular expression is used to split a root security rule template into two parts:
