@@ -1,0 +1,4 @@
+match /images/{animal} {
+    allow read: if true;
+    allow write: if request.auth.admin != null;
+}
