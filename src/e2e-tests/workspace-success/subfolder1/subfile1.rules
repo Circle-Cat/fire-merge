@@ -1,0 +1,4 @@
+match /music/{music} {
+    allow read: if request.auth != null;
+    allow insert, update: if request.auth.token.admin == true;
+}
